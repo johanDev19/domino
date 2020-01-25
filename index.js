@@ -50,4 +50,16 @@ function distributeDominos(dominos) {
 
 shuffleDominos = shuffleDominos(dominos);
 distributeDominos(shuffleDominos);
+console.log('dominos per player')
 console.table(players)
+
+function findPlayerWithDobleSix(players) {
+  return players.filter((player) => player.dominos.toString().includes('6,6'))
+}
+
+function initGame(players) {
+  const startingPlayer = findPlayerWithDobleSix(players);
+  
+}
+
+initGame(players)
