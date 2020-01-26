@@ -67,20 +67,19 @@ function findPlayerWithDobleSix(players) {
   return players.filter((player) => player.dominos.toString().includes('6,6'))[0]
 }
 
-function addDominoToTable(player, domino) {
+function addDominoToTable(player, dominoIndex) {
   dominoTable = {
     ...dominoTable,
     lastPlayer: player,
-    table: [...dominoTable.table, domino]
+    table: [...dominoTable.table, player.dominos.splice(dominoIndex,1)]
   }
-  console.log(dominoTable)
 }
 
 function initGame(players, dominoTable) {
   if(dominoTable.table.length === 0) {
     const startingPlayer = findPlayerWithDobleSix(players);
     const dominoIndexToPlay = startingPlayer.dominos.map(domino => domino.toString() === '6,6').indexOf(true)
-    addDominoToTable(startingPlayer, startingPlayer.dominos[dominoIndexToPlay])
+    addDominoToTable(startingPlayer, dominoIndexToPlay)
   }
 }
 
