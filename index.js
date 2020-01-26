@@ -1,6 +1,9 @@
 const dominos = [];
 const players = [];
-const dominoTable = [];
+let dominoTable = {
+  lastPlayer: {},
+  table: [],
+};
 const maxNumberOfDominos = 28;
 const numberOfPlayers = 4;
 
@@ -61,17 +64,23 @@ console.log('dominos per player')
 console.table(players)
 
 function findPlayerWithDobleSix(players) {
-  return players.filter((player) => player.dominos.toString().includes('6,6'))
+  return players.filter((player) => player.dominos.toString().includes('6,6'))[0]
 }
 
-function addDominoToTable(player, dominoTable) {
-  console.log(player)
+function addDominoToTable(player, domino) {
+  dominoTable = {
+    ...dominoTable,
+    lastPlayer: player,
+    table: [...dominoTable.table, domino]
+  }
+  console.log(dominoTable)
 }
 
 function initGame(players, dominoTable) {
-  if(dominoTable.length === 0) {
+  if(dominoTable.table.length === 0) {
     const startingPlayer = findPlayerWithDobleSix(players);
-    addDominoToTable(startingPlayer, dominoTable)
+    const dominoIndexToPlay = startingPlayer.dominos.map(domino => domino.toString() === '6,6').indexOf(true)
+    addDominoToTable(startingPlayer, startingPlayer.dominos[dominoIndexToPlay])
   }
 }
 
