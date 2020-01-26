@@ -1,5 +1,6 @@
 const dominos = [];
 const players = [];
+const dominoTable = [];
 const maxNumberOfDominos = 28;
 const numberOfPlayers = 4;
 
@@ -24,9 +25,15 @@ while (dominos.length < maxNumberOfDominos) {
 function shuffleDominos(array) {
   const temp = [];
   let len = array.length;
+  let dominosIndexRead = [];
+
   while (len) {
-    temp.push(array[getRandomInt(dominos)]);
-    len--;
+    let currentDominoIndex = getRandomInt(dominos);
+    if(!dominosIndexRead.includes(currentDominoIndex)) {
+      temp.push(array[currentDominoIndex]);
+      dominosIndexRead.push(currentDominoIndex)
+      len--;
+    }
   }
   return temp;
 }
@@ -57,9 +64,15 @@ function findPlayerWithDobleSix(players) {
   return players.filter((player) => player.dominos.toString().includes('6,6'))
 }
 
-function initGame(players) {
-  const startingPlayer = findPlayerWithDobleSix(players);
-  
+function addDominoToTable(player, dominoTable) {
+  console.log(player)
 }
 
-initGame(players)
+function initGame(players, dominoTable) {
+  if(dominoTable.length === 0) {
+    const startingPlayer = findPlayerWithDobleSix(players);
+    addDominoToTable(startingPlayer, dominoTable)
+  }
+}
+
+initGame(players, dominoTable)
