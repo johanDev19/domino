@@ -11,6 +11,7 @@ module.exports = class Domino {
 
 
     this.generateDominos();
+    this.shuffleDominos();
   }
 
   generateDominos() {
@@ -24,6 +25,7 @@ module.exports = class Domino {
       this.currenDominoNumber++;
     }
 
+    console.log('Dominos created');
     return this.dominos;
   }
 
@@ -40,7 +42,8 @@ module.exports = class Domino {
         len--;
       }
     }
-
+    
+    console.log('Dominos shuffled');
     return this.shuffledDominos;
   }
 }

@@ -1,13 +1,5 @@
-const domino = require('./domino');
-const player = require('./player');
-const table = require('./table');
+const game = require('./game');
 
-const Domino = new domino();
-const Player = new player();
-const Table = new table();
+const Game = new game();
 
-Player.distributeDominos();
-console.log(Player.findPlayerWithDobleSix());
-
-Table.addDominoToTable(Player.findPlayerWithDobleSix(),[6,6])
-console.log(Table.table)
+console.table(Game.players)

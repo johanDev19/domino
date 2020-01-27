@@ -9,8 +9,6 @@ module.exports = class Player extends Domino {
   }
 
   distributeDominos() {
-    this.shuffleDominos();
-    
     let currentPlayer = 0;
     const dominosPerPlayer = this.shuffledDominos.length / this.numberOfPlayers;
     const mutateDominos = [...this.shuffledDominos];
@@ -24,7 +22,8 @@ module.exports = class Player extends Domino {
 
       currentPlayer++
     }
-  
+    
+    console.log('Dominos distributed to all players')
     return this.players;
   }
 
