@@ -1,8 +1,10 @@
+const Table = require('./table');
 const utils = require('./utils/global');
 
-module.exports = class Domino {
+module.exports = class Domino extends Table {
   
   constructor() {
+    super();
     this.dominos = [];
     this.shuffledDominos = []
     this.maxNumberOfDominos = 28;

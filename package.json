@@ -1,0 +1,22 @@
+{
+  "name": "domino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "domino": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johanDev19/domino.git"
+  },
+  "author": "Johan Guzman (johan.dev19@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johanDev19/domino/issues"
+  },
+  "homepage": "https://github.com/johanDev19/domino#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

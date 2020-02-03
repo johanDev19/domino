@@ -1,9 +1,7 @@
 const Player = require('./player');
 
-module.exports = class extends Player {
+module.exports = class Player {
   constructor(){
-    super();
-
     this.table = [];
   }
 
