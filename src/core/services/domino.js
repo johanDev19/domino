@@ -1,5 +1,5 @@
 const Table = require('./table');
-const utils = require('./utils/global');
+const utils = require('./../../../utils/global');
 
 module.exports = class Domino extends Table {
   
