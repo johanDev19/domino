@@ -1,11 +1,12 @@
 const Domino = require('./domino');
 
 module.exports = class Player extends Domino {
-  numberOfPlayers = 4;
-  players = [];
 
   constructor() {
     super()
+
+    this.numberOfPlayers = 4;
+    this.players = [];
   }
 
   distributeDominos() {

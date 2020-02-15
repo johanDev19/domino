@@ -2,14 +2,24 @@ const Express = require('express');
 const router = Express.Router();
 
 
-module.exports = ({services}) => {
+module.exports = ({services, mountPoint}) => {
   const { game } = services;
 
-  router.get('/hola', (req, res) => {
+  router.get('/dominos', (req, res) => {
     console.log('desde el endpoint de hola')
     res.send(game.dominos)
-  })
+  });
 
-  const app = new Express().use(router);
+  router.get('/dominos/shuffled', (req, res) => {
+    console.log('desde el endpoint de hola')
+    res.send(game.shuffledDominos)
+  });
+
+  router.get('/dominos/shuffle-dominos', (req, res) => {
+    console.log('desde el endpoint de hola')
+    res.send(game.shuffleDominos())
+  });
+
+  const app = new Express().use(mountPoint, router);
   return app;
 }

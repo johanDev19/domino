@@ -1,6 +1,4 @@
-const Player = require('./player');
-
-module.exports = class Player {
+module.exports = class Table {
   constructor(){
     this.table = [];
   }
@@ -14,6 +12,10 @@ module.exports = class Player {
       }
     ]
 
+    return this.table;
+  }
+
+  getTableInfo() {
     return this.table;
   }
   

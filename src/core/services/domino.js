@@ -34,7 +34,8 @@ module.exports = class Domino extends Table {
   shuffleDominos() {
     let len = this.dominos.length;
     const dominosIndexRead = [];
-    
+    this.shuffledDominos = [];
+
     while (len > 0) {
       let currentDominoIndex = utils().getRandomInt(this.dominos);
 
