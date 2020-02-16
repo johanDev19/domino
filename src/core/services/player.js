@@ -24,7 +24,6 @@ module.exports = class Player extends Domino {
       currentPlayer++
     }
     
-    console.log('Dominos distributed to all players')
     return this.players;
   }
 

@@ -2,12 +2,15 @@ const Express = require('express');
 
 const createGameService = require('./core/services/game');
 const createTableService = require('./core/services/game');
-
-const gameService = new createGameService();
-const tableService = new createTableService();
+const createPlayerService = require('./core/services/game');
+const createDominoService = require('./core/services/game');
 
 const createGameApi = require('./endpoints/game');
 const createTableApi = require('./endpoints/table');
+const createPlayerApi = require('./endpoints/player');
+const createDominoApi = require('./endpoints/game');
+
+const gameService = new createGameService();
 
 const gameApi = createGameApi({
   services: {
@@ -18,9 +21,23 @@ const gameApi = createGameApi({
 
 const tableApi = createTableApi({
   services: {
-    table: tableService
+    table: gameService
   },
   mountPoint: '/table'
+})
+
+const playerApi = createPlayerApi({
+  services: {
+    player: gameService
+  },
+  mountPoint: '/player'
+})
+
+const dominoApi = createDominoApi({
+  services: {
+    domino: gameService
+  },
+  mountPoint: '/domino'
 })
 
 module.exports = () => {
@@ -30,4 +47,6 @@ module.exports = () => {
     .use(Express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
     .use(gameApi)
     .use(tableApi)
+    .use(playerApi)
+    .use(dominoApi)
 }

@@ -3,18 +3,18 @@ const router = Express.Router();
 
 
 module.exports = ({services, mountPoint}) => {
-  const { table } = services;
+  const { player } = services;
 
-  router.get('/info', (req, res) => {
+  router.get('/', (req, res) => {
     console.log('desde el endpoint de hola')
-    res.send(table.getTableInfo())
+    res.send(player.player)
   });
 
-  router.get('/add-game', (req, res) => {
+  router.get('/player-with-doble-six', (req, res) => {
     console.log('desde el endpoint de hola')
-    res.send(table.addDominoToTable(table.findPlayerWithDobleSix(),[6,6]))
+    res.send(player.findPlayerWithDobleSix())
   });
-
+  
 
 
   const app = new Express().use(mountPoint, router);
