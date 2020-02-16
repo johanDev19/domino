@@ -1,5 +1,5 @@
 module.exports = class Table {
-  constructor(){
+  constructor() {
     this.table = [];
   }
 
@@ -7,10 +7,10 @@ module.exports = class Table {
     this.table = [
       ...this.table,
       {
-        player: player,
-        game: game,
-      }
-    ]
+        player,
+        game,
+      },
+    ];
 
     return this.table;
   }
@@ -18,5 +18,4 @@ module.exports = class Table {
   getTableInfo() {
     return this.table;
   }
-  
-}
+};
