@@ -8,8 +8,8 @@ module.exports = class Table {
       ...this.table,
       {
         player,
-        game,
-      },
+        game
+      }
     ];
 
     return this.table;

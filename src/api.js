@@ -19,36 +19,37 @@ const dominoService = new CreateDominoService();
 
 const gameApi = createGameApi({
   services: {
-    game: gameService,
+    game: gameService
   },
-  mountPoint: '/game',
+  mountPoint: '/game'
 });
 
 const tableApi = createTableApi({
   services: {
-    table: tableService,
+    table: tableService
   },
-  mountPoint: '/table',
+  mountPoint: '/table'
 });
 
 const playerApi = createPlayerApi({
   services: {
-    player: playerService,
+    player: playerService
   },
-  mountPoint: '/player',
+  mountPoint: '/player'
 });
 
 const dominoApi = createDominoApi({
   services: {
-    domino: dominoService,
+    domino: dominoService
   },
-  mountPoint: '/domino',
+  mountPoint: '/domino'
 });
 
-module.exports = () => new Express()
-  .use(Express.json()) // for parsing application/json
-  .use(Express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
-  .use(gameApi)
-  .use(tableApi)
-  .use(playerApi)
-  .use(dominoApi);
+module.exports = () =>
+  new Express()
+    .use(Express.json()) // for parsing application/json
+    .use(Express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+    .use(gameApi)
+    .use(tableApi)
+    .use(playerApi)
+    .use(dominoApi);
