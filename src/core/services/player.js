@@ -1,6 +1,6 @@
-const Domino = require('./domino');
+const Store = require('./../../../store/index');
 
-module.exports = class Player extends Domino {
+module.exports = class Player extends Store {
   constructor() {
     super();
 

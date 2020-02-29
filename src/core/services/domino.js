@@ -1,50 +1,50 @@
-const Table = require('./table');
+const Store = require('./../../../store/index');
 const utils = require('./../../../utils/global');
 
-module.exports = class Domino extends Table {
+module.exports = class Domino extends Store {
   constructor() {
     super();
-    this.dominos = [];
-    this.shuffledDominos = [];
-    this.maxNumberOfDominos = 28;
-    this.startDominoNumber = 6;
-    this.currenDominoNumber = 0;
 
     this.generateDominos();
     this.shuffleDominos();
   }
 
   generateDominos() {
-    while (this.dominos.length < this.maxNumberOfDominos) {
-      if (this.currenDominoNumber > this.startDominoNumber) {
-        this.currenDominoNumber = 0;
-        this.startDominoNumber--;
+    const dominos = [];
+    let startDominoNumber = 6;
+    let currenDominoNumber = 0;
+    const maxNumberOfDominos = 28;
+
+    while (dominos.length < maxNumberOfDominos) {
+      if (currenDominoNumber > startDominoNumber) {
+        currenDominoNumber = 0;
+        startDominoNumber--;
       }
 
-      this.dominos.push([this.startDominoNumber, this.currenDominoNumber]);
-      this.currenDominoNumber++;
+      dominos.push([startDominoNumber, currenDominoNumber]);
+      currenDominoNumber++;
     }
 
-    console.log('Dominos created');
+    this.setData('dominos', dominos);
     return this.dominos;
   }
 
   shuffleDominos() {
-    let len = this.dominos.length;
+    let len = this.store.dominos.length;
     const dominosIndexRead = [];
-    this.shuffledDominos = [];
+    const shuffledDominos = [];
 
     while (len > 0) {
-      let currentDominoIndex = utils().getRandomInt(this.dominos);
+      const currentDominoIndex = utils().getRandomInt(this.store.dominos);
 
       if (!dominosIndexRead.includes(currentDominoIndex)) {
-        this.shuffledDominos.push(this.dominos[currentDominoIndex]);
+        shuffledDominos.push(this.store.dominos[currentDominoIndex]);
         dominosIndexRead.push(currentDominoIndex);
         len--;
       }
     }
 
-    console.log('Dominos shuffled');
-    return this.shuffledDominos;
+    this.setData('shuffledDominos', shuffledDominos);
+    return shuffledDominos;
   }
 };

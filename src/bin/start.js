@@ -1,7 +1,7 @@
 const createApi = require('./../api');
 
-function bootstrap() {
-  const api = createApi();
+async function bootstrap() {
+  const api = await createApi();
 
   const PORT = process.env.PORT || 4000;
   console.log(`Listening at port ${PORT}`);

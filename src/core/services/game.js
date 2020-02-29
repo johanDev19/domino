@@ -1,11 +1,5 @@
-const Player = require('./player');
+const Store = require('./../../../store/index');
 
-class Game extends Player {
-  constructor() {
-    super();
-
-    this.distributeDominos();
-  }
-}
+class Game extends Store {}
 
 module.exports = Game;

@@ -1,5 +1,8 @@
-module.exports = class Table {
+const Store = require('./../../../store/index');
+
+module.exports = class Table extends Store {
   constructor() {
+    super();
     this.table = [];
   }
 
