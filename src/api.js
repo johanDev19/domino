@@ -1,16 +1,21 @@
 const Express = require('express');
 
 const CreateGameService = require('./core/services/game');
-// const createTableService = require('./core/services/game');
-// const createPlayerService = require('./core/services/game');
-// const createDominoService = require('./core/services/game');
+const CreateTableService = require('./core/services/game');
+const CreatePlayerService = require('./core/services/game');
+const CreateDominoService = require('./core/services/game');
 
 const createGameApi = require('./endpoints/game');
 const createTableApi = require('./endpoints/table');
 const createPlayerApi = require('./endpoints/player');
 const createDominoApi = require('./endpoints/game');
 
+const fielHandle = require('./../tools/fileHandle');
+
 const gameService = new CreateGameService();
+const tableService = new CreateTableService();
+const playerService = new CreatePlayerService();
+const dominoService = new CreateDominoService();
 
 const gameApi = createGameApi({
   services: {
@@ -21,21 +26,21 @@ const gameApi = createGameApi({
 
 const tableApi = createTableApi({
   services: {
-    table: gameService,
+    table: tableService,
   },
   mountPoint: '/table',
 });
 
 const playerApi = createPlayerApi({
   services: {
-    player: gameService,
+    player: playerService,
   },
   mountPoint: '/player',
 });
 
 const dominoApi = createDominoApi({
   services: {
-    domino: gameService,
+    domino: dominoService,
   },
   mountPoint: '/domino',
 });

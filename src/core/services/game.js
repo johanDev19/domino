@@ -6,7 +6,6 @@ class Game extends Player {
 
     this.distributeDominos();
   }
-  
 }
 
 module.exports = Game;
