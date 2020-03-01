@@ -1,4 +1,4 @@
-const Store = require('./../../../store/index');
+const Store = require('./../../../store/Store');
 const utils = require('./../../../utils/global');
 
 module.exports = class Domino extends Store {

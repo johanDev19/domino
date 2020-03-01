@@ -1,4 +1,4 @@
-const Store = require('./../../../store/index');
+const Store = require('./../../../store/Store');
 
 class Game extends Store {}
 

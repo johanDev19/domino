@@ -1,5 +1,7 @@
 const Express = require('express');
 
+const CreateStore = require('./../store/Store');
+
 const CreateGameService = require('./core/services/game');
 const CreateTableService = require('./core/services/table');
 const CreatePlayerService = require('./core/services/player');
@@ -9,6 +11,7 @@ const createGameApi = require('./endpoints/game');
 const createTableApi = require('./endpoints/table');
 const createPlayerApi = require('./endpoints/player');
 const createDominoApi = require('./endpoints/dominos');
+const createStoreApi = require('./endpoints/store');
 
 module.exports = async () => {
 
@@ -48,11 +51,19 @@ module.exports = async () => {
     mountPoint: '/domino'
   });
 
+  const storeApi = createStoreApi({
+    services: {
+      store: new CreateStore()
+    },
+    mountPoint: '/store'
+  });
+
   return new Express()
     .use(Express.json()) // for parsing application/json
     .use(Express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
     .use(gameApi)
     .use(tableApi)
     .use(playerApi)
-    .use(dominoApi);
+    .use(dominoApi)
+    .use(storeApi);
 };

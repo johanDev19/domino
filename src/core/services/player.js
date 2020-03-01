@@ -1,4 +1,4 @@
-const Store = require('./../../../store/index');
+const Store = require('./../../../store/Store');
 
 module.exports = class Player extends Store {
   distributeDominos() {
