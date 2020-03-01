@@ -30,15 +30,17 @@ module.exports = class Domino extends Store {
   }
 
   shuffleDominos() {
-    let len = this.store.dominos.length;
+    let len = this.getAllData().dominos.length;
     const dominosIndexRead = [];
     const shuffledDominos = [];
 
     while (len > 0) {
-      const currentDominoIndex = utils().getRandomInt(this.store.dominos);
+      const currentDominoIndex = utils().getRandomInt(
+        this.getAllData().dominos
+      );
 
       if (!dominosIndexRead.includes(currentDominoIndex)) {
-        shuffledDominos.push(this.store.dominos[currentDominoIndex]);
+        shuffledDominos.push(this.getAllData().dominos[currentDominoIndex]);
         dominosIndexRead.push(currentDominoIndex);
         len--;
       }

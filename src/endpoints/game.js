@@ -6,12 +6,12 @@ module.exports = ({ services, mountPoint }) => {
 
   router.get('/dominos', (req, res) => {
     console.log('desde el endpoint de hola');
-    res.send(game.dominos);
+    res.send(game.loadLocalDataBase().dominos);
   });
 
   router.get('/dominos/shuffled', (req, res) => {
     console.log('desde el endpoint de hola');
-    res.send(game.shuffledDominos);
+    res.send(game.loadLocalDataBase().shuffledDominos);
   });
 
   router.get('/dominos/shuffle-dominos', (req, res) => {

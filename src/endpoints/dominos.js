@@ -6,11 +6,11 @@ module.exports = ({ services, mountPoint }) => {
   const { domino } = services;
 
   router.get('/', (req, res) => {
-    res.send(domino.store.dominos);
+    res.send(domino.loadLocalDataBase().dominos);
   });
 
   router.get('/shuffled', (req, res) => {
-    res.send(domino.store.shuffledDominos);
+    res.send(domino.loadLocalDataBase().shuffledDominos);
   });
 
   router.get('/shuffle-dominos', (req, res) => {

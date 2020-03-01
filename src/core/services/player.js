@@ -4,9 +4,9 @@ module.exports = class Player extends Store {
   distributeDominos() {
     const numberOfPlayers = 4;
     let currentPlayer = 0;
-    const players = this.store.players || [];
-    const dominosPerPlayer = this.store.shuffledDominos.length / numberOfPlayers;
-    const mutateDominos = [...this.store.shuffledDominos];
+    const players = [];
+    const dominosPerPlayer = this.getAllData().shuffledDominos.length / numberOfPlayers;
+    const mutateDominos = [...this.getAllData().shuffledDominos];
 
     while (players.length < 4 && currentPlayer < numberOfPlayers) {
       players.push({
@@ -19,11 +19,11 @@ module.exports = class Player extends Store {
     }
 
     this.setData('players', players);
-    return this.store.players;
+    return this.getAllData().players;
   }
 
   findPlayerWithDobleSix() {
-    return this.store.players.filter(player =>
+    return this.getAllData().players.filter(player =>
       player.dominos.toString().includes('6,6')
     )[0];
   }

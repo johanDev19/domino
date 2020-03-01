@@ -7,7 +7,7 @@ module.exports = ({ services, mountPoint }) => {
 
   router.get('/', (req, res) => {
     console.log('desde el endpoint de player');
-    res.send(player.store.players);
+    res.send(player.loadLocalDataBase().players);
   });
 
   router.get('/player-with-doble-six', (req, res) => {

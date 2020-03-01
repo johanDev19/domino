@@ -10,6 +10,15 @@ module.exports = ({ services, mountPoint }) => {
     res.send(store.getAllData());
   });
 
+  router.get('/reset', (req, res) => {
+    res.send(store.resetData());
+  });
+
+  router.get('/load', (req, res) => {
+    console.log('desde el endpoint de player');
+    res.send(store.loadLocalDataBase());
+  });
+
   const app = new Express().use(mountPoint, router);
   return app;
 };
