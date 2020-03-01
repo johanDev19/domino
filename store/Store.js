@@ -2,14 +2,11 @@ const fs = require('fs');
 
 class Store {
   constructor() {
-    this.store = {};
-
-    this.store = {};
+    this.store = this.loadLocalDataBase();
   }
 
   loadLocalDataBase() {
-    const data = JSON.parse(fs.readFileSync('store/database.json', 'utf8'));
-    return data;
+    return JSON.parse(fs.readFileSync('store/database.json', 'utf8'));
   }
 
   setData(key, data) {
@@ -27,6 +24,10 @@ class Store {
       JSON.stringify(this.store),
       err => err && console.log(err)
     );
+  }
+
+  getAllData() {
+    return this.loadLocalDataBase();
   }
 }
 

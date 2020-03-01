@@ -2,7 +2,6 @@ const Store = require('./../../../store/Store');
 
 module.exports = class Player extends Store {
   distributeDominos() {
-    console.log(this.store)
     const numberOfPlayers = 4;
     let currentPlayer = 0;
     const players = this.store.players || [];

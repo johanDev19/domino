@@ -7,7 +7,7 @@ module.exports = ({ services, mountPoint }) => {
 
   router.get('/', (req, res) => {
     console.log('desde el endpoint de player');
-    res.send('');
+    res.send(store.getAllData());
   });
 
   const app = new Express().use(mountPoint, router);
