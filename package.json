@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
     "start": "./node_modules/nodemon/bin/nodemon.js src/bin/start.js",
     "start:debug": "./node_modules/nodemon/bin/nodemon.js src/bin/start.js --debug server.js",

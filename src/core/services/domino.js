@@ -18,11 +18,11 @@ module.exports = class Domino extends Store {
     while (dominos.length < maxNumberOfDominos) {
       if (currenDominoNumber > startDominoNumber) {
         currenDominoNumber = 0;
-        startDominoNumber--;
+        startDominoNumber -= 1;
       }
 
       dominos.push([startDominoNumber, currenDominoNumber]);
-      currenDominoNumber++;
+      currenDominoNumber += 1;
     }
 
     this.setData('dominos', dominos);
@@ -42,7 +42,7 @@ module.exports = class Domino extends Store {
       if (!dominosIndexRead.includes(currentDominoIndex)) {
         shuffledDominos.push(this.getAllData().dominos[currentDominoIndex]);
         dominosIndexRead.push(currentDominoIndex);
-        len--;
+        len -= 1;
       }
     }
 

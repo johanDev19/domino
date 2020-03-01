@@ -5,7 +5,8 @@ module.exports = class Player extends Store {
     const numberOfPlayers = 4;
     let currentPlayer = 0;
     const players = [];
-    const dominosPerPlayer = this.getAllData().shuffledDominos.length / numberOfPlayers;
+    const dominosPerPlayer =
+      this.getAllData().shuffledDominos.length / numberOfPlayers;
     const mutateDominos = [...this.getAllData().shuffledDominos];
 
     while (players.length < 4 && currentPlayer < numberOfPlayers) {
@@ -15,7 +16,7 @@ module.exports = class Player extends Store {
         dominos: mutateDominos.splice(0, dominosPerPlayer)
       });
 
-      currentPlayer++;
+      currentPlayer += 1;
     }
 
     this.setData('players', players);
