@@ -2,12 +2,30 @@ const fs = require('fs');
 
 class Data {
   constructor() {
-    const data = fs.readFileSync(`${__dirname}/dataTemplate.json`);
+    this.store = {};
+
+    this.loadLocalDataBase();
+  }
+
+  loadLocalDataBase() {
+    const data = fs.readFileSync('store/database.json');
     this.store = JSON.parse(data);
   }
 
   setData(key, data) {
-    this.store[key] = data;
+    let store = this.store;
+    store = {
+      ...store,
+      [key]: data
+    };
+
+    this.store = store;
+
+    fs.writeFile(
+      'store/database.json',
+      JSON.stringify(store),
+      err => err && console.log(err)
+    );
   }
 }
 

@@ -6,8 +6,8 @@ module.exports = ({ services, mountPoint }) => {
   const { player } = services;
 
   router.get('/', (req, res) => {
-    console.log('desde el endpoint de hola');
-    res.send(player.players);
+    console.log('desde el endpoint de player');
+    res.send(player.store.players);
   });
 
   router.get('/player-with-doble-six', (req, res) => {
@@ -15,9 +15,8 @@ module.exports = ({ services, mountPoint }) => {
     res.send(player.findPlayerWithDobleSix());
   });
 
-  router.get('/number-of-player', (req, res) => {
-    console.log('desde el endpoint de hola');
-    res.send(player.numberOfPlayers.toString());
+  router.get('/distribute-dominos', (req, res) => {
+    res.send(player.distributeDominos());
   });
 
   const app = new Express().use(mountPoint, router);
