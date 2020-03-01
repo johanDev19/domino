@@ -4,12 +4,22 @@ class Data {
   constructor() {
     this.store = {};
 
-    this.loadLocalDataBase();
+    this.store = this.loadLocalDataBase();
   }
 
   loadLocalDataBase() {
     const data = fs.readFileSync('store/database.json');
-    this.store = JSON.parse(data);
+    return JSON.parse(data);
+  }
+
+  resetDataBase() {
+    const store = {};
+    
+    fs.writeFile(
+      'store/database.json',
+      JSON.stringify(store),
+      err => err && console.log(err)
+    );
   }
 
   setData(key, data) {
