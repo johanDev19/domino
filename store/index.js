@@ -14,7 +14,7 @@ class Data {
 
   resetDataBase() {
     const store = {};
-    
+
     fs.writeFile(
       'store/database.json',
       JSON.stringify(store),
