@@ -21,7 +21,10 @@ module.exports = class Domino extends Store {
         startDominoNumber -= 1;
       }
 
-      dominos.push([startDominoNumber, currenDominoNumber]);
+      dominos.push({
+        values: [startDominoNumber, currenDominoNumber],
+        played: false
+      });
       currenDominoNumber += 1;
     }
 
