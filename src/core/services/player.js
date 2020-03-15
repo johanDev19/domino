@@ -1,4 +1,5 @@
 const Store = require('./../../../store/Store');
+const utils = require('./../../../utils/global');
 
 module.exports = class Player extends Store {
   distributeDominos() {
@@ -13,7 +14,8 @@ module.exports = class Player extends Store {
       players.push({
         playerId: currentPlayer,
         playerName: `player ${currentPlayer}`,
-        dominos: mutateDominos.splice(0, dominosPerPlayer)
+        dominos: mutateDominos.splice(0, dominosPerPlayer),
+        lastPlayer: false
       });
 
       currentPlayer += 1;
@@ -24,8 +26,8 @@ module.exports = class Player extends Store {
   }
 
   findPlayerWithDobleSix() {
-    return this.getAllData().players.filter(player =>
-      player.dominos.toString().includes('6,6')
-    )[0];
+    const { players } = this.getAllData();
+
+    return utils.findPlayerWithDobleSix(players);
   }
 };

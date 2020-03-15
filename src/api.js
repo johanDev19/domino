@@ -58,6 +58,11 @@ module.exports = async () => {
     mountPoint: '/store'
   });
 
+  process.on('SIGINT', () => {
+    console.log('closing nodejs process');
+    process.exit();
+  });
+
   return new Express()
     .use(Express.json()) // for parsing application/json
     .use(Express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded

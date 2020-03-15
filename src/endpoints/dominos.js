@@ -17,6 +17,10 @@ module.exports = ({ services, mountPoint }) => {
     res.send(domino.shuffleDominos());
   });
 
+  router.get('/generate', (req, res) => {
+    res.send(domino.generateDominos());
+  });
+
   const app = new Express().use(mountPoint, router);
   return app;
 };

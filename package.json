@@ -23,7 +23,9 @@
   "homepage": "https://github.com/johanDev19/domino#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "underscore": "^1.9.2",
+    "utils": "^0.3.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

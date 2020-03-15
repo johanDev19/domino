@@ -22,9 +22,11 @@ module.exports = class Domino extends Store {
       }
 
       dominos.push({
-        values: [startDominoNumber, currenDominoNumber],
+        left: startDominoNumber,
+        right: currenDominoNumber,
         played: false
       });
+
       currenDominoNumber += 1;
     }
 
@@ -38,9 +40,7 @@ module.exports = class Domino extends Store {
     const shuffledDominos = [];
 
     while (len > 0) {
-      const currentDominoIndex = utils().getRandomInt(
-        this.getAllData().dominos
-      );
+      const currentDominoIndex = utils.getRandomInt(this.getAllData().dominos);
 
       if (!dominosIndexRead.includes(currentDominoIndex)) {
         shuffledDominos.push(this.getAllData().dominos[currentDominoIndex]);
