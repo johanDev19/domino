@@ -6,10 +6,9 @@ module.exports = ({ services, mountPoint }) => {
   const { game } = services;
 
   router.post('/make-a-play', (req, res) => {
-    const { user, domino } = req.body;
-    game.makePlay();
+    const { player, domino } = req.body;
 
-    res.send(game.makePlay(user, domino));
+    res.send(game.makePlay(player, domino));
   });
 
   router.post('/init', (req, res) => {
