@@ -4,23 +4,21 @@ const utils = require('./../../../utils/global');
 class Game extends Store {
   constructor() {
     super();
-    this.table = {
-      games: [], //
-      status: 'inactive',
+
+    this.setData('table', {
+      games: [{ left: 6, right: 1 }],
+      status: 'active',
       lastPlayerId: 0,
       points: 0
-    };
-
-    this.setData('table', this.table);
+    });
   }
 
   startGame() {
     const { players } = this.loadLocalDataBase();
 
     const playerWithDobleSix = utils.findPlayerWithDobleSix(players);
-    const domino = utils.extractDomino(playerWithDobleSix.dominos, [6, 6]);
 
-    return this.makePlay(playerWithDobleSix);
+    return this.makePlay(playerWithDobleSix, { left: 6, right: 6 });
   }
 
   whoIsTheNextPlayer() {
@@ -29,11 +27,16 @@ class Game extends Store {
   }
 
   makePlay(player, dominoToPlay) {
-    const nextPlayer = this.whoIsTheNextPlayer();
-    const availableDominosToPlay = this.findAvailableDominosToPlay(nextPlayer);
-    let tableMutate = this.table;
+    const { table } = this.loadLocalDataBase();
+    let tableMutate = table;
+    let playerMutate = player;
 
-    if (!availableDominosToPlay.includes(dominoToPlay)) {
+    const availableDominosToPlay = utils.findAvailableDominosToPlay(
+      player,
+      table
+    );
+
+    if (!utils.canPlayThisDomino(dominoToPlay, availableDominosToPlay)) {
       return 'jugada no permitida';
     }
 
@@ -43,13 +46,15 @@ class Game extends Store {
       lastPlayerId: player.playerId
     };
 
-    this.table = tableMutate;
+    playerMutate = {
+      ...playerMutate,
+      dominos: utils.extractDomino(playerMutate, dominoToPlay)
+    };
+
+    // this.updatePlayer(playerMutate);
+    // this.setData('table', tableMutate);
 
     return true;
-  }
-
-  findAvailableDominosToPlay(user) {
-    console.log(user);
   }
 }
 

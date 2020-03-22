@@ -12,22 +12,48 @@ function findPlayerWithDobleSix(players) {
     }
   });
 
-  return playerWithDobleSix.filter(v => v);
+  return playerWithDobleSix.filter(v => v)[0];
 }
 
-function extractDomino(dominos, domino) {
-  const arrayOfDominos = dominos.map(d => [...d.values]);
+function extractDomino(player, dominoToPlay) {
+  const result = player.dominos.reduce((acc, curr) => {
+    if (curr.left === dominoToPlay.left && curr.right === dominoToPlay.right) {
+      return [...acc];
+    }
 
-  const result = _.where(
-    dominos.map(d => d.values),
-    domino
+    return [...acc, curr];
+  }, []);
+
+  return result;
+}
+
+function findAvailableDominosToPlay(players, table) {
+  const allDominosNotPlayed = players.dominos.filter(
+    domino => domino.played === false
   );
 
-  return {};
+  const lastDominoPlayed = _.last(table.games);
+  const availableLeft = _.where(allDominosNotPlayed, {
+    left: lastDominoPlayed.left
+  });
+  const availableRight = _.where(allDominosNotPlayed, {
+    right: lastDominoPlayed.right
+  });
+  const allAvailableDominos = [
+    ...new Set([...availableLeft, ...availableRight])
+  ];
+
+  return allAvailableDominos;
+}
+
+function canPlayThisDomino(domino, availableDominos) {
+  return !!_.findWhere(availableDominos, domino);
 }
 
 module.exports = {
   getRandomInt,
   findPlayerWithDobleSix,
-  extractDomino
+  extractDomino,
+  findAvailableDominosToPlay,
+  canPlayThisDomino
 };

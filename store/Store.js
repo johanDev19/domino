@@ -1,4 +1,5 @@
 const fs = require('fs');
+const _ = require('underscore');
 
 class Store {
   loadLocalDataBase() {
@@ -18,6 +19,16 @@ class Store {
       JSON.stringify(store),
       err => err && console.log(err)
     );
+  }
+
+  updatePlayer(player) {
+    const { players } = this.loadLocalDataBase();
+    const playerIndex = _.findIndex(players, { playerId: player.playerId });
+    players[playerIndex] = player;
+
+    // this.setData('players', players);
+
+    return players;
   }
 
   getAllData() {
