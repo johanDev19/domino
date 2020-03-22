@@ -41,13 +41,14 @@ class Game extends Store {
 
     playerMutate = {
       ...playerMutate,
-      dominos: utils.extractDomino(playerMutate, dominoToPlay)
+      dominos: utils.extractDomino(playerMutate, dominoToPlay),
+      lastPlayer: true
     };
 
     this.updatePlayer(playerMutate);
     this.setData('table', tableMutate);
 
-    return true;
+    return tableMutate;
   }
 }
 

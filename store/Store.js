@@ -23,12 +23,19 @@ class Store {
 
   updatePlayer(player) {
     const { players } = this.loadLocalDataBase();
+
     const playerIndex = _.findIndex(players, { playerId: player.playerId });
-    players[playerIndex] = player;
 
-    this.setData('players', players);
+    const playersMutate = _.map(players, p => ({
+      ...p,
+      lastPlayer: false
+    }));
 
-    return players;
+    playersMutate[playerIndex] = player;
+
+    this.setData('players', playersMutate);
+
+    return playersMutate;
   }
 
   getAllData() {
