@@ -3,7 +3,13 @@ const Store = require('./../../../store/Store');
 module.exports = class Table extends Store {
   constructor() {
     super();
-    this.table = [];
+
+    this.setData('table', {
+      games: [],
+      status: 'active',
+      lastPlayerId: 0,
+      points: 0
+    });
   }
 
   addDominoToTable(player, game) {
@@ -19,6 +25,6 @@ module.exports = class Table extends Store {
   }
 
   getTableInfo() {
-    return this.table;
+    return this.loadLocalDataBase().table;
   }
 };

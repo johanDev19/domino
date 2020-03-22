@@ -33,11 +33,12 @@ function findAvailableDominosToPlay(players, table) {
   );
 
   const lastDominoPlayed = _.last(table.games);
+
   const availableLeft = _.where(allDominosNotPlayed, {
-    left: lastDominoPlayed.left
+    left: lastDominoPlayed ? lastDominoPlayed.left : 6
   });
   const availableRight = _.where(allDominosNotPlayed, {
-    right: lastDominoPlayed.right
+    right: lastDominoPlayed ? lastDominoPlayed.right : 6
   });
   const allAvailableDominos = [
     ...new Set([...availableLeft, ...availableRight])

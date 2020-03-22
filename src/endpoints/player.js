@@ -6,7 +6,6 @@ module.exports = ({ services, mountPoint }) => {
   const { player } = services;
 
   router.get('/', (req, res) => {
-    console.log('desde el endpoint de player');
     res.send(player.loadLocalDataBase().players);
   });
 
@@ -15,7 +14,7 @@ module.exports = ({ services, mountPoint }) => {
     res.send(player.findPlayerWithDobleSix());
   });
 
-  router.get('/distribute-dominos', (req, res) => {
+  router.post('/distribute-dominos', (req, res) => {
     res.send(player.distributeDominos());
   });
 

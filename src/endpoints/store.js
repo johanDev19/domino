@@ -6,16 +6,14 @@ module.exports = ({ services, mountPoint }) => {
   const { store } = services;
 
   router.get('/', (req, res) => {
-    console.log('desde el endpoint de player');
     res.send(store.getAllData());
   });
 
-  router.get('/reset', (req, res) => {
+  router.post('/reset', (req, res) => {
     res.send(store.resetData());
   });
 
-  router.get('/load', (req, res) => {
-    console.log('desde el endpoint de player');
+  router.post('/load', (req, res) => {
     res.send(store.loadLocalDataBase());
   });
 

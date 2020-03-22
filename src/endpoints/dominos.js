@@ -13,11 +13,11 @@ module.exports = ({ services, mountPoint }) => {
     res.send(domino.loadLocalDataBase().shuffledDominos);
   });
 
-  router.get('/shuffle-dominos', (req, res) => {
+  router.post('/shuffle-dominos', (req, res) => {
     res.send(domino.shuffleDominos());
   });
 
-  router.get('/generate', (req, res) => {
+  router.post('/generate', (req, res) => {
     res.send(domino.generateDominos());
   });
 

@@ -4,13 +4,6 @@ const utils = require('./../../../utils/global');
 class Game extends Store {
   constructor() {
     super();
-
-    this.setData('table', {
-      games: [{ left: 6, right: 1 }],
-      status: 'active',
-      lastPlayerId: 0,
-      points: 0
-    });
   }
 
   startGame() {
