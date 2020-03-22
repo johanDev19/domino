@@ -18,6 +18,10 @@ module.exports = ({ services, mountPoint }) => {
     res.send(player.distributeDominos());
   });
 
+  router.get('/next', (req, res) => {
+    res.send(player.findTheNextPlayer());
+  });
+
   const app = new Express().use(mountPoint, router);
   return app;
 };

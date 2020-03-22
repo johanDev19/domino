@@ -30,4 +30,10 @@ module.exports = class Player extends Store {
 
     return utils.findPlayerWithDobleSix(players);
   }
+
+  findTheNextPlayer() {
+    const { players, table } = this.getAllData();
+
+    return utils.findTheNextPlayer(table, players);
+  }
 };

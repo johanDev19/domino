@@ -15,6 +15,18 @@ function findPlayerWithDobleSix(players) {
   return playerWithDobleSix.filter(v => v)[0];
 }
 
+function findTheNextPlayer(table, players) {
+  const maxIndexOfPlayer = 3;
+  const { lastPlayerId } = table;
+  const lastPlayerIndex = _.findIndex(players, { playerId: lastPlayerId });
+
+  if (lastPlayerIndex === maxIndexOfPlayer) {
+    return players[0];
+  }
+
+  return players[lastPlayerIndex + 1];
+}
+
 function extractDomino(player, dominoToPlay) {
   const result = player.dominos.reduce((acc, curr) => {
     if (curr.left === dominoToPlay.left && curr.right === dominoToPlay.right) {
@@ -56,5 +68,6 @@ module.exports = {
   findPlayerWithDobleSix,
   extractDomino,
   findAvailableDominosToPlay,
-  canPlayThisDomino
+  canPlayThisDomino,
+  findTheNextPlayer
 };
