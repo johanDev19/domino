@@ -26,7 +26,7 @@ class Store {
     const playerIndex = _.findIndex(players, { playerId: player.playerId });
     players[playerIndex] = player;
 
-    // this.setData('players', players);
+    this.setData('players', players);
 
     return players;
   }
