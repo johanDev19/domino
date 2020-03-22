@@ -4,12 +4,7 @@ module.exports = class Table extends Store {
   constructor() {
     super();
 
-    this.setData('table', {
-      games: [],
-      status: 'active',
-      lastPlayerId: 0,
-      points: 0
-    });
+    this.loadTable();
   }
 
   addDominoToTable(player, game) {
@@ -26,5 +21,14 @@ module.exports = class Table extends Store {
 
   getTableInfo() {
     return this.loadLocalDataBase().table;
+  }
+
+  loadTable() {
+    return this.setData('table', {
+      games: [],
+      status: 'active',
+      lastPlayerId: 0,
+      points: 0
+    });
   }
 };

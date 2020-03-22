@@ -13,6 +13,10 @@ module.exports = ({ services, mountPoint }) => {
     res.send(table.addDominoToTable(table.findPlayerWithDobleSix(), [6, 6]));
   });
 
+  router.post('/create', (req, res) => {
+    res.send(table.loadTable());
+  });
+
   const app = new Express().use(mountPoint, router);
   return app;
 };
