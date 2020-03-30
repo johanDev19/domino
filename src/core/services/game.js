@@ -34,8 +34,7 @@ class Game extends Store {
     if (!playerHasThisDomino) {
       return 'No posee esta ficha';
     }
-    // CREATE A FUNCTION TO ORDER THE DOMINOS ACCORDING THE LAST DOMINO PLAYED
-    // -> FUNCTION HERE
+
     const dominoOrdered = utils.orderDominoAccordingTheTable(
       playerHasThisDomino,
       table,
