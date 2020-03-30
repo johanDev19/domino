@@ -44,23 +44,69 @@ function findAvailableDominosToPlay(players, table) {
     domino => domino.played === false
   );
 
-  const lastDominoPlayed = _.last(table.games);
+  const lastDominoLeft = _.first(table.games);
+  const lastDominoRight = _.last(table.games);
 
-  const availableLeft = _.where(allDominosNotPlayed, {
-    left: lastDominoPlayed ? lastDominoPlayed.left : 6
-  });
-  const availableRight = _.where(allDominosNotPlayed, {
-    right: lastDominoPlayed ? lastDominoPlayed.right : 6
-  });
-  const allAvailableDominos = [
-    ...new Set([...availableLeft, ...availableRight])
+  const availableLeft = [
+    ..._.where(allDominosNotPlayed, {
+      left: lastDominoLeft.left
+    }),
+    ..._.where(allDominosNotPlayed, {
+      right: lastDominoLeft.left
+    })
   ];
+  const availableRight = [
+    ..._.where(allDominosNotPlayed, {
+      left: lastDominoRight.right
+    }),
+    ..._.where(allDominosNotPlayed, {
+      right: lastDominoRight.right
+    })
+  ];
+
+  const allAvailableDominos = {
+    left: [...new Set([...availableLeft])],
+    right: [...new Set([...availableRight])]
+  };
 
   return allAvailableDominos;
 }
 
-function canPlayThisDomino(domino, availableDominos) {
-  return !!_.findWhere(availableDominos, domino);
+function invertDominoValues(domino) {
+  if (domino) {
+    return {
+      left: domino.right,
+      right: domino.left,
+      played: domino.played
+    };
+  }
+
+  return undefined;
+}
+
+function orderDominoAccordingTheTable(domino, table, side) {
+  const games = table.games;
+  let matchedDomino = domino;
+
+  if (side === 'left') {
+    matchedDomino = _.first(games);
+  }
+  if (side === 'right') {
+    matchedDomino = _.last(games);
+  }
+
+  if (matchedDomino[side] !== domino[side]) {
+    return domino;
+  }
+
+  return invertDominoValues(domino);
+}
+
+function playerHasThisDomino(domino, availableDominos) {
+  const dominoFound =
+    invertDominoValues(_.findWhere(availableDominos, domino)) ||
+    _.findWhere(availableDominos, invertDominoValues(domino));
+  return dominoFound;
 }
 
 module.exports = {
@@ -68,6 +114,8 @@ module.exports = {
   findPlayerWithDobleSix,
   extractDomino,
   findAvailableDominosToPlay,
-  canPlayThisDomino,
-  findTheNextPlayer
+  playerHasThisDomino,
+  findTheNextPlayer,
+  invertDominoValues,
+  orderDominoAccordingTheTable
 };

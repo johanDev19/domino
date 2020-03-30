@@ -1,11 +1,8 @@
+const _ = require('underscore');
 const Store = require('./../../../store/Store');
 const utils = require('./../../../utils/global');
 
 class Game extends Store {
-  constructor() {
-    super();
-  }
-
   startGame() {
     const { players } = this.loadLocalDataBase();
 
@@ -19,7 +16,7 @@ class Game extends Store {
     return players.filter(player => player.lastPlayer);
   }
 
-  makePlay(player, dominoToPlay) {
+  makePlay(player, dominoToPlay, side) {
     const { table } = this.loadLocalDataBase();
     let tableMutate = table;
     let playerMutate = player;
@@ -29,26 +26,59 @@ class Game extends Store {
       table
     );
 
-    if (!utils.canPlayThisDomino(dominoToPlay, availableDominosToPlay)) {
-      return 'jugada no permitida';
+    const playerHasThisDomino = utils.playerHasThisDomino(dominoToPlay, [
+      ...availableDominosToPlay.left,
+      ...availableDominosToPlay.right
+    ]);
+
+    if (!playerHasThisDomino) {
+      return 'No posee esta ficha';
+    }
+    // CREATE A FUNCTION TO ORDER THE DOMINOS ACCORDING THE LAST DOMINO PLAYED
+    // -> FUNCTION HERE
+    const dominoOrdered = utils.orderDominoAccordingTheTable(
+      playerHasThisDomino,
+      table,
+      side
+    );
+
+    if (side === 'left') {
+      tableMutate = {
+        ...tableMutate,
+        games: [dominoOrdered, ...tableMutate.games],
+        lastPlayerId: player.playerId
+      };
+      playerMutate = {
+        ...playerMutate,
+        dominos: utils.extractDomino(playerMutate, dominoToPlay),
+        lastPlayer: true
+      };
+
+      this.updatePlayer(playerMutate);
+      this.setData('table', tableMutate);
+
+      return tableMutate;
     }
 
-    tableMutate = {
-      ...tableMutate,
-      games: [...tableMutate.games, dominoToPlay],
-      lastPlayerId: player.playerId
-    };
+    if (side === 'right') {
+      tableMutate = {
+        ...tableMutate,
+        games: [...tableMutate.games, dominoOrdered],
+        lastPlayerId: player.playerId
+      };
+      playerMutate = {
+        ...playerMutate,
+        dominos: utils.extractDomino(playerMutate, dominoToPlay),
+        lastPlayer: true
+      };
 
-    playerMutate = {
-      ...playerMutate,
-      dominos: utils.extractDomino(playerMutate, dominoToPlay),
-      lastPlayer: true
-    };
+      this.updatePlayer(playerMutate);
+      this.setData('table', tableMutate);
 
-    this.updatePlayer(playerMutate);
-    this.setData('table', tableMutate);
+      return tableMutate;
+    }
 
-    return tableMutate;
+    return false;
   }
 }
 
