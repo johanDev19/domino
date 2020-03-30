@@ -85,7 +85,7 @@ function invertDominoValues(domino) {
 }
 
 function orderDominoAccordingTheTable(domino, table, side) {
-  const games = table.games;
+  const { games = [] } = table;
   let matchedDomino = domino;
 
   if (games.length === 0) {
