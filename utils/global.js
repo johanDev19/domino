@@ -49,18 +49,18 @@ function findAvailableDominosToPlay(players, table) {
 
   const availableLeft = [
     ..._.where(allDominosNotPlayed, {
-      left: lastDominoLeft.left
+      left: lastDominoLeft ? lastDominoLeft.left : 6
     }),
     ..._.where(allDominosNotPlayed, {
-      right: lastDominoLeft.left
+      right: lastDominoLeft ? lastDominoLeft.left : 6
     })
   ];
   const availableRight = [
     ..._.where(allDominosNotPlayed, {
-      left: lastDominoRight.right
+      left: lastDominoRight ? lastDominoRight.right : 6
     }),
     ..._.where(allDominosNotPlayed, {
-      right: lastDominoRight.right
+      right: lastDominoRight ? lastDominoRight.right : 6
     })
   ];
 
@@ -87,6 +87,10 @@ function invertDominoValues(domino) {
 function orderDominoAccordingTheTable(domino, table, side) {
   const games = table.games;
   let matchedDomino = domino;
+
+  if (games.length === 0) {
+    return domino;
+  }
 
   if (side === 'left') {
     matchedDomino = _.first(games);

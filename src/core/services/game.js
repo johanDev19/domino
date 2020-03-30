@@ -8,7 +8,7 @@ class Game extends Store {
 
     const playerWithDobleSix = utils.findPlayerWithDobleSix(players);
 
-    return this.makePlay(playerWithDobleSix, { left: 6, right: 6 });
+    return this.makePlay(playerWithDobleSix, { left: 6, right: 6 }, 'left');
   }
 
   whoIsTheNextPlayer() {
@@ -26,10 +26,10 @@ class Game extends Store {
       table
     );
 
-    const playerHasThisDomino = utils.playerHasThisDomino(dominoToPlay, [
-      ...availableDominosToPlay.left,
-      ...availableDominosToPlay.right
-    ]);
+    const playerHasThisDomino = utils.playerHasThisDomino(
+      dominoToPlay,
+      availableDominosToPlay[side]
+    );
 
     if (!playerHasThisDomino) {
       return 'No posee esta ficha';
