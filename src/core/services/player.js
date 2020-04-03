@@ -15,7 +15,8 @@ module.exports = class Player extends Store {
         playerId: currentPlayer,
         playerName: `player ${currentPlayer}`,
         dominos: mutateDominos.splice(0, dominosPerPlayer),
-        lastPlayer: false
+        lastPlayer: false,
+        teamId: utils.getTeamIdByPlayerId(currentPlayer)
       });
 
       currentPlayer += 1;

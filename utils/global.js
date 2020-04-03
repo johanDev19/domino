@@ -138,6 +138,19 @@ function playerHasThisDomino(domino, availableDominos) {
   return dominoFound;
 }
 
+function getTeamIdByPlayerId(playerId) {
+  switch (playerId) {
+    case 0:
+    case 2:
+      return 1;
+    case 1:
+    case 3:
+      return 2;
+    default:
+      return null;
+  }
+}
+
 module.exports = {
   getRandomInt,
   findPlayerWithDobleSix,
@@ -146,5 +159,6 @@ module.exports = {
   playerHasThisDomino,
   findTheNextPlayer,
   invertDominoValues,
-  orderDominoAccordingTheTable
+  orderDominoAccordingTheTable,
+  getTeamIdByPlayerId
 };
