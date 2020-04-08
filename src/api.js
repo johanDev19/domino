@@ -6,12 +6,14 @@ const CreateGameService = require('./core/services/game');
 const CreateTableService = require('./core/services/table');
 const CreatePlayerService = require('./core/services/player');
 const CreateDominoService = require('./core/services/domino');
+const CreateBotService = require('./core/services/bot');
 
 const createGameApi = require('./endpoints/game');
 const createTableApi = require('./endpoints/table');
 const createPlayerApi = require('./endpoints/player');
 const createDominoApi = require('./endpoints/dominos');
 const createStoreApi = require('./endpoints/store');
+const createBotApi = require('./endpoints/bot');
 
 module.exports = async () => {
 
@@ -22,6 +24,8 @@ module.exports = async () => {
   const playerService = new CreatePlayerService();
 
   const dominoService = new CreateDominoService();
+
+  const botService = new CreateDominoService();
 
   const gameApi = createGameApi({
     services: {
@@ -58,6 +62,13 @@ module.exports = async () => {
     mountPoint: '/store'
   });
 
+  const botApi = createBotApi({
+    services: {
+      store: botService
+    },
+    mountPoint: '/bot'
+  });
+
   process.on('SIGINT', () => {
     console.log('closing nodejs process');
     process.exit();
@@ -70,5 +81,6 @@ module.exports = async () => {
     .use(tableApi)
     .use(playerApi)
     .use(dominoApi)
-    .use(storeApi);
+    .use(storeApi)
+    .use(botApi);
 };
