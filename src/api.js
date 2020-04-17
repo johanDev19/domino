@@ -25,7 +25,14 @@ module.exports = async () => {
 
   const dominoService = new CreateDominoService();
 
-  const botService = new CreateDominoService();
+  const botService = new CreateBotService({
+    depends: {
+      gameService,
+      tableService,
+      playerService,
+      dominoService
+    }
+  });
 
   const gameApi = createGameApi({
     services: {
@@ -64,7 +71,7 @@ module.exports = async () => {
 
   const botApi = createBotApi({
     services: {
-      store: botService
+      bot: botService
     },
     mountPoint: '/bot'
   });

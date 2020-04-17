@@ -1,34 +1,20 @@
 const Game = require('./../services/game');
 
 module.exports = class Bot extends Game {
-  constructor() {
+  constructor({ depends }) {
     super();
-
-    this.loadTable();
+    this.services = depends;
   }
 
-  addDominoToTable(player, game) {
-    this.table = [
-      ...this.table,
-      {
-        player,
-        game
-      }
-    ];
+  initGame() {
+    const { gameService, dominoService, playerService } = this.services;
+    // run all service to start the game
+    dominoService.generateDominos();
+    dominoService.shuffleDominos();
+    playerService.distributeDominos();
 
-    return this.table;
+    return gameService.startGame();
   }
 
-  getTableInfo() {
-    return this.loadLocalDataBase().table;
-  }
-
-  loadTable() {
-    return this.setData('table', {
-      games: [],
-      status: 'active',
-      lastPlayerId: 0,
-      points: 0
-    });
-  }
+  
 };

@@ -6,7 +6,7 @@ module.exports = ({ services, mountPoint }) => {
   const { bot } = services;
 
   router.post('/', (req, res) => {
-    res.send('init the bot');
+    res.send(bot.initGame());
   });
 
   const app = new Express().use(mountPoint, router);
