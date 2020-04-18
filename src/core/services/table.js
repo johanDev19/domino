@@ -1,6 +1,6 @@
-const Store = require('./../../../store/Store');
+const Storage = require('./../../../storage');
 
-module.exports = class Table extends Store {
+module.exports = class Table extends Storage {
   constructor() {
     super();
 

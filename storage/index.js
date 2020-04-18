@@ -1,9 +1,9 @@
 const fs = require('fs');
 const _ = require('underscore');
 
-class Store {
+class Storage {
   loadLocalDataBase() {
-    return JSON.parse(fs.readFileSync('store/database.json', 'utf8'));
+    return JSON.parse(fs.readFileSync('storage/database.json', 'utf8'));
   }
 
   setData(key, data) {
@@ -15,7 +15,7 @@ class Store {
     };
 
     fs.writeFileSync(
-      'store/database.json',
+      'storage/database.json',
       JSON.stringify(store),
       err => err && console.log(err)
     );
@@ -44,7 +44,7 @@ class Store {
 
   resetData() {
     fs.writeFileSync(
-      'store/database.json',
+      'storage/database.json',
       JSON.stringify({}),
       err => err && console.log(err)
     );
@@ -53,4 +53,4 @@ class Store {
   }
 }
 
-module.exports = Store;
+module.exports = Storage;

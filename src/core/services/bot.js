@@ -16,5 +16,7 @@ module.exports = class Bot extends Game {
     return gameService.startGame();
   }
 
-  
+  botPlayGame() {
+    
+  }
 };

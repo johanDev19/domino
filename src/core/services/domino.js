@@ -1,7 +1,7 @@
-const Store = require('./../../../store/Store');
+const Storage = require('./../../../storage');
 const utils = require('./../../../utils/global');
 
-module.exports = class Domino extends Store {
+module.exports = class Domino extends Storage {
   constructor() {
     super();
 

@@ -1,8 +1,8 @@
 const _ = require('underscore');
-const Store = require('./../../../store/Store');
+const Storage = require('./../../../storage');
 const utils = require('./../../../utils/global');
 
-class Game extends Store {
+class Game extends Storage {
   startGame() {
     const { players } = this.loadLocalDataBase();
 

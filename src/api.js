@@ -1,6 +1,6 @@
 const Express = require('express');
 
-const CreateStore = require('./../store/Store');
+const CreateStorage = require('./../storage');
 
 const CreateGameService = require('./core/services/game');
 const CreateTableService = require('./core/services/table');
@@ -12,17 +12,14 @@ const createGameApi = require('./endpoints/game');
 const createTableApi = require('./endpoints/table');
 const createPlayerApi = require('./endpoints/player');
 const createDominoApi = require('./endpoints/dominos');
-const createStoreApi = require('./endpoints/store');
+const createStorageApi = require('./endpoints/storage');
 const createBotApi = require('./endpoints/bot');
 
 module.exports = async () => {
 
   const gameService = new CreateGameService();
-
   const tableService = new CreateTableService();
-
   const playerService = new CreatePlayerService();
-
   const dominoService = new CreateDominoService();
 
   const botService = new CreateBotService({
@@ -62,11 +59,11 @@ module.exports = async () => {
     mountPoint: '/domino'
   });
 
-  const storeApi = createStoreApi({
+  const storageApi = createStorageApi({
     services: {
-      store: new CreateStore()
+      storage: new CreateStorage()
     },
-    mountPoint: '/store'
+    mountPoint: '/storage'
   });
 
   const botApi = createBotApi({
@@ -88,6 +85,6 @@ module.exports = async () => {
     .use(tableApi)
     .use(playerApi)
     .use(dominoApi)
-    .use(storeApi)
+    .use(storageApi)
     .use(botApi);
 };

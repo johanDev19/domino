@@ -1,7 +1,7 @@
-const Store = require('./../../../store/Store');
+const Storage = require('./../../../storage');
 const utils = require('./../../../utils/global');
 
-module.exports = class Player extends Store {
+module.exports = class Player extends Storage {
   distributeDominos() {
     const numberOfPlayers = 4;
     let currentPlayer = 0;
